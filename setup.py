@@ -158,7 +158,7 @@ def get_extensions():
         op_files.remove('./mmcv/ops/csrc/pytorch/cuda/bias_act_cuda.cu')
         cuda_args = os.getenv('MMCV_CUDA_ARGS')
         extra_compile_args = {
-            'nvcc': [cuda_args, '-std=c++14'] if cuda_args else ['-std=c++14'],
+            'nvcc': [cuda_args, '-std=c++17'] if cuda_args else ['-std=c++17'],
             'cxx': ['-std=c++14'],
         }
         if torch.cuda.is_available() or os.getenv('FORCE_CUDA', '0') == '1':
@@ -202,9 +202,9 @@ def get_extensions():
 
         if platform.system() != 'Windows':
             if parse_version(torch.__version__) <= parse_version('1.12.1'):
-                extra_compile_args['cxx'] = ['-std=c++14']
+                extra_compile_args['cxx'] = ['-std=c++17']
             else:
-                extra_compile_args['cxx'] = ['-std=c++14']
+                extra_compile_args['cxx'] = ['-std=c++17']
         else:
             if parse_version(torch.__version__) <= parse_version('1.12.1'):
                 extra_compile_args['cxx'] = ['/std:c++14']
@@ -429,7 +429,7 @@ def get_extensions():
         # argument
         if 'nvcc' in extra_compile_args and platform.system() != 'Windows':
             if parse_version(torch.__version__) <= parse_version('1.12.1'):
-                extra_compile_args['nvcc'] += ['-std=c++14']
+                extra_compile_args['nvcc'] += ['-std=c++17']
             else:
                 extra_compile_args['nvcc'] += ['-std=c++17']
 
